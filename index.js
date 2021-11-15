@@ -17,7 +17,7 @@ bot.on('ready', () => console.log(`Logged in as ${bot.user.tag}.`));
 
 bot.on('message', async message => {
   
-  if (message.content.startsWith(config.prefix.toLowerCase)) {
+  if (message.content.startsWith(config.prefix)) {
     let args = message.content.slice(config.prefix.length).split(' ');
     let command = args.shift().toLowerCase();
 
