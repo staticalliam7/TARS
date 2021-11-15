@@ -14,7 +14,7 @@ let bot = new Client({
 });
 
 bot.on('ready', () => console.log(`Logged in as ${bot.user.tag}.`));
-
+bot.on('ready', () =>  message.channel.send("Astra Online."))
 bot.on('message', async message => {
   
   if (message.content.startsWith(config.prefix)) {
