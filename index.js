@@ -8,7 +8,7 @@ let bot = new Client({
     status: 'online',
     activity: {
       name: `${config.prefix}help`,
-      type: 'LISTENING'
+      type: 'WATCHING'
     }
   }
 });
@@ -17,7 +17,7 @@ bot.on('ready', () => console.log(`Logged in as ${bot.user.tag}.`));
 
 bot.on('message', async message => {
   
-  if (message.content.startsWith(config.prefix)) {
+  if (message.content.startsWith(config.prefix.toLowerCase)) {
     let args = message.content.slice(config.prefix.length).split(' ');
     let command = args.shift().toLowerCase();
 
