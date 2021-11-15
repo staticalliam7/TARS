@@ -3,7 +3,7 @@ const config = require('./config');
 const commands = require('./help');
 
 let bot = new Client({
-  fetchAllMembers: true, // Remove this if the bot is in large guilds.
+  fetchAllMembers: true, 
   presence: {
     status: 'online',
     activity: {
