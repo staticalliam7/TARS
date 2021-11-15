@@ -26,9 +26,8 @@ bot.on('message', async message => {
         if(!args[0]) return message.reply('Error. Please define how many messages you wanna delete, ***Ex: !clear 10*** ')
         if (!message.member.hasPermission("MANAGE_MESSAGES")) 
         return message.reply(`You can't use this command.`);
-       if (message.channel.type === 'text') 
-       message.channel.bulkDelete(args[0])
-       message.delete()
+       if (message.channel.type === 'text') message.channel.bulkDelete(args[0])
+       
        break;
       case 'ping':
         let msg = await message.reply('Pinging...');
