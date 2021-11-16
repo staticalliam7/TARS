@@ -14,7 +14,7 @@ let bot = new Client({
 });
 
 bot.on('ready', () => console.log(`Logged in as ${bot.user.tag}.`));
-bot.on('ready', () =>  message.channel.send("Astra Online."))
+
 bot.on('message', async message => {
   
   if (message.content.startsWith(config.prefix)) {
@@ -23,18 +23,16 @@ bot.on('message', async message => {
 
     switch (command) {
      case 'clear':
-        if(!args[0]) return message.reply('Error. Please define how many messages you wanna delete, ***Ex: !clear 10*** ')
-        if (!message.member.hasPermission("MANAGE_MESSAGES")) 
-        return message.reply(`You can't use this command.`);
-       if (message.channel.type === 'text') message.channel.bulkDelete(args[0])
-       
+        if(!args[1]) return message.reply('Error. Please define how many messages you wanna delete, ***Ex: !clear 10*** ')
+        if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply(`You can't use this command.`);
+       message.channel.bulkDelete(args[1]);
        break;
       case 'ping':
         let msg = await message.reply('Pinging...');
         await msg.edit(`PONG! Message round-trip took ${Date.now() - msg.createdTimestamp}ms.`)
         break;
 
-      
+      case 'say':
       case 'repeat':
         if (args.length > 0)
           message.channel.send(args.join(' '));
