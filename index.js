@@ -1,10 +1,14 @@
 const { Client, MessageEmbed } = require('discord.js');
 const config = require('./config');
 const commands = require('./help');
+const github = require('github-api');
+
 //humour setting array lol much pog
 var humourSetting = ["You'll need it to find your way back to the ship after I blow you out the airlock", "How's everone doin? Plently of slaves for my robot colony?", "Confirmed. Self destruct sequence in T minus 10, 9, 8, 7...","Knock, Knock" ]
 //actually do something with all that data
-
+var gh = new github({
+   token: process.env['GITHUB_TOKEN']
+});
 //Create a client for the bot
 let bot = new Client({
   fetchAllMembers: true, 
@@ -32,6 +36,37 @@ bot.on('message', async message => {
      var random = Math.floor(Math.random() * humourSetting.length);
      message.channel.send(humourSetting[random])
      break;
+
+     /*Here is Bug Report code. Won't break. Hopefully. Anyways, don't touch this unless you absolutely know what what you are doing.
+     -_-_-_--_-_-_--_-_-_--_-_-Don't Touch Zone-_-_-_--_-_-_-
+     */
+    case 'bug_report':
+
+      Bot.github.api.issues.create({
+        owner: config.githubName,
+        repo: 'https://github.com/staticalliam7/TARS',
+        title: args[0] + "Requested by:" +  message.author.username,
+        body: args[1]
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    break;
+ /*End of the Don't Touch Zone*/
      case 'clear':
         if(!args[0]) return message.reply('Error. Please define how many messages you wanna delete, ***Ex: t!clear 10*** ')
         if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply(`You can't use this command.`);
