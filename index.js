@@ -48,6 +48,7 @@ bot.on('message', async message => {
         title: args[0] + "Requested by:" +  message.author.username,
         body: args[1]
       });
+      message.channel.send("Issue Successfully Created")
 
 
 
