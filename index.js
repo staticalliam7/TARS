@@ -1,7 +1,11 @@
 const { Client, MessageEmbed } = require('discord.js');
 const config = require('./config');
 const commands = require('./help');
+//humour setting array lol much pog
+var humourSetting = ["You'll need it to find your way back to the ship after I blow you out the airlock", "How's everone doin? Plently of slaves for my robot colony?", "Confirmed. Self destruct sequence in T minus 10, 9, 8, 7...","Knock, Knock" ]
+//actually do something with all that data
 
+//Create a client for the bot
 let bot = new Client({
   fetchAllMembers: true, 
   presence: {
@@ -14,37 +18,50 @@ let bot = new Client({
 });
 
 bot.on('ready', () => console.log(`Logged in as ${bot.user.tag}.`));
-
 bot.on('message', async message => {
-  
+  //check if messages being sent are valid commands
   if (message.content.startsWith(config.prefix)) {
     let args = message.content.slice(config.prefix.length).split(' ');
     let command = args.shift().toLowerCase();
 
     switch (command) {
+        case 'humourSetting':
+        message.channel.send("That\'s 70%")
+        break;
+     case 'joke':
+     var random = Math.floor(Math.random() * humourSetting.length);
+     message.channel.send(humourSetting[random])
+     break;
      case 'clear':
-        if(!args[1]) return message.reply('Error. Please define how many messages you wanna delete, ***Ex: !clear 10*** ')
+        if(!args[0]) return message.reply('Error. Please define how many messages you wanna delete, ***Ex: t!clear 10*** ')
         if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply(`You can't use this command.`);
-       message.channel.bulkDelete(args[1]);
-       break;
+              if (message.channel.type === 'text') 
+      
+    var clearEmbed = new MessageEmbed()
+	.setColor('RED')
+	.setTitle('Deleted Messages')
+	.setDescription('Someone used t!clear')
+	.setThumbnail('https://i.imgur.com/gcElJpw.png')
+	.addField('Deleted ' + args[0] + 'Messages', true)
+	.setTimestamp()
+	.setFooter(`Requested by: ${message.member ? message.member.displayName : message.author.username}`, message.author.displayAvatarURL())
+
+    message.channel.send(clearEmbed);
+    var deleteThisMany = ++args[0];
+    message.channel.bulkDelete(deleteThisMany);
+    break;
       case 'ping':
         let msg = await message.reply('Pinging...');
         await msg.edit(`PONG! Message round-trip took ${Date.now() - msg.createdTimestamp}ms.`)
         break;
 
-      case 'say':
-      case 'repeat':
-        if (args.length > 0)
-          message.channel.send(args.join(' '));
-        else
-          message.reply('You did not send a message to repeat, cancelling command.')
-        break
+      
 
       /* Unless you know what you're doing, don't change this command. */
       case 'help':
         let embed =  new MessageEmbed()
           .setTitle('HELP MENU')
-          .setColor('GREEN')
+          .setColor('ORANGE')
           .setFooter(`Requested by: ${message.member ? message.member.displayName : message.author.username}`, message.author.displayAvatarURL())
           .setThumbnail(bot.user.displayAvatarURL());
         if (!args[0])
