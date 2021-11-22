@@ -57,11 +57,11 @@ bot.on('message', async message => {
           });*/
         
           var auth = message.author.tag
-          fs.writeFile('stocks/companies/' + args[1] + '.txt', 'Owner:' + auth + '\n'+ args[1] + '\nFunds:  5,000 dollars', function (err) {
+          fs.writeFile('bugss/' + args[0] + '.txt', 'Submitted by: ' + auth + '\n'+ args.split(1,100) + '\n', function (err) {
           if (err) throw err;
           console.log('Saved!');
          try {
-          var dat = fs.readFileSync('bugs/' + Math.random() + '.txt', 'utf8')
+          var dat = fs.readFileSync('bugs/' + args[0], '.txt', 'utf8')
             console.log("File read.")
           } catch (err) {
            message.channel.send(err)
