@@ -2,7 +2,7 @@ const { Client, MessageEmbed } = require('discord.js');
 const config = require('./config');
 const commands = require('./help');
 const github = require('github-api');
-
+const fs = require('fs');
 //humour setting array lol much pog
 var humourSetting = ["You'll need it to find your way back to the ship after I blow you out the airlock", "How's everone doin? Plently of slaves for my robot colony?", "Confirmed. Self destruct sequence in T minus 10, 9, 8, 7...","Knock, Knock" ]
 //actually do something with all that data
@@ -41,19 +41,32 @@ bot.on('message', async message => {
      -_-_-_--_-_-_--_-_-_--_-_-Don't Touch Zone-_-_-_--_-_-_-
      */
     case 'bug_report':
-    try{
-      Bot.github.api.issues.create({
-        owner: config.githubName,
-        repo: 'https://github.com/staticalliam7/TARS',
-        title: args[0] + "Requested by:" +  message.author.username,
-        body: "sample text"
+          
+         /* var auth = message.author.tag
+          fs.writeFile('', 'Submitted by: ' + message.author.username + '\n'+ args.slice(0, 100) + '\n', function (err) {
+          if (err) throw err;
+          console.log('Saved!');
+                try {
+          var dat = fs.readFileSync('./bugs/' + Math.random(1,9000) + '.txt', 'utf8')
+            console.log("File read.")
+          } catch (err) {
+           message.channel.send(err)
+          }
+          message.channel.send("submitted")
+        
+          });*/
+        
+          var auth = message.author.tag
+          fs.writeFile('stocks/companies/' + args[1] + '.txt', 'Owner:' + auth + '\n'+ args[1] + '\nFunds:  5,000 dollars', function (err) {
+          if (err) throw err;
+          console.log('Saved!');
+         try {
+          var dat = fs.readFileSync('bugs/' + Math.random() + '.txt', 'utf8')
+            console.log("File read.")
+          } catch (err) {
+           message.channel.send(err)
+          }
       });
-      message.channel.send("Issue Successfully Created")
-    }
-    catch(error){
-        message.channel.send("Hmmm. Something went wrong on my end. Try again later");
-    }
-
 
 
 
@@ -71,32 +84,28 @@ bot.on('message', async message => {
 
     break;
  /*End of the Don't Touch Zone*/
-     case 'clear':
-        if(!args[0]) return message.reply('Error. Please define how many messages you wanna delete, ***Ex: t!clear 10*** ')
-        if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply(`You can't use this command.`);
-              if (message.channel.type === 'text') 
-      
-    var clearEmbed = new MessageEmbed()
-	.setColor('RED')
-	.setTitle('Deleted Messages')
-	.setDescription('Someone used t!clear')
-	.setThumbnail('https://i.imgur.com/gcElJpw.png')
-	.addField('Deleted ' + args[0] + 'Messages', true)
-	.setTimestamp()
-	.setFooter(`Requested by: ${message.member ? message.member.displayName : message.author.username}`, message.author.displayAvatarURL())
 
-    message.channel.send(clearEmbed);
-    var deleteThisMany = ++args[0];
-    message.channel.bulkDelete(deleteThisMany);
-    break;
+
+       //checks server connectivity through pings
       case 'ping':
         let msg = await message.reply('Pinging...');
         await msg.edit(`PONG! Message round-trip took ${Date.now() - msg.createdTimestamp}ms.`)
         break;
 
+      //makes the command that explains TARS
+        case 'tars':
+        let kipp = new MessageEmbed()
+          .setTitle('TARS')
+          .setColor('ORANGE')
+          .setDescription('TARS is a bot that is a part of the "Intersetellar trio". Each bot has their own uniqe features, just like TARS. If you want more information, ping the bot devs.')
+          .setThumbnail('https://i.imgur.com/6eScB4j.png')
+          .setFooter(`Requested by: ${message.member ? message.member.displayName : message.author.username}`,message.author.displayAvatarURL())
+          ;
+        message.channel.send(kipp);
+        break;
       
 
-      /* Unless you know what you're doing, don't change this command. */
+      //makes the help embed
       case 'help':
         let embed =  new MessageEmbed()
           .setTitle('HELP MENU')
