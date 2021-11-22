@@ -41,15 +41,18 @@ bot.on('message', async message => {
      -_-_-_--_-_-_--_-_-_--_-_-Don't Touch Zone-_-_-_--_-_-_-
      */
     case 'bug_report':
-
+    try{
       Bot.github.api.issues.create({
         owner: config.githubName,
         repo: 'https://github.com/staticalliam7/TARS',
         title: args[0] + "Requested by:" +  message.author.username,
-        body: args[1]
+        body: "sample text"
       });
       message.channel.send("Issue Successfully Created")
-
+    }
+    catch(error){
+        message.channel.send("Hmmm. Something went wrong on my end. Try again later");
+    }
 
 
 
