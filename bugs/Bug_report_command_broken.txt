@@ -1,0 +1,2 @@
+Submitted by: OneFrostyBoi#5355
+/usr/local/bin/node,/tmp/prybar-nodejs-116733534.js

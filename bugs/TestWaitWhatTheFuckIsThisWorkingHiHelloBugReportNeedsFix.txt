@@ -1,0 +1,4 @@
+Submitted by: OneFrostyBoi#5355
+/usr/local/bin/node,/run_dir/interp.js,index.js
+
+lol much pongers

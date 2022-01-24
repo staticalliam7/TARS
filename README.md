@@ -1,2 +1,3 @@
-## Setup
-No Setup required, should work out of the box. Please ensure bot has moderator priviliges
+## How 2 Make gigachad bot wörk
+
+nah fam bot already set. just make sure this sexy gigachad bot has moderator perms.

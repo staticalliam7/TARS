@@ -1,0 +1,3 @@
+Submitted by: pirated gonb (racism enjoyer)#2654
+/usr/local/bin/node,/run_dir/interp.js,index.js
+

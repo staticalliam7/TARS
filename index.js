@@ -1,19 +1,20 @@
 const { Client, MessageEmbed } = require('discord.js');
+//const voice = require('discord.js/voice')
 const config = require('./config');
 const commands = require('./help');
-const github = require('github-api');
+//const distube = require('distube')
+
 const fs = require('fs');
+
 //humour setting array lol much pog
 var humourSetting = ["You'll need it to find your way back to the ship after I blow you out the airlock", "How's everone doin? Plently of slaves for my robot colony?", "Confirmed. Self destruct sequence in T minus 10, 9, 8, 7...","Knock, Knock" ]
 //actually do something with all that data
-var gh = new github({
-   token: process.env['GITHUB_TOKEN']
-});
+
 //Create a client for the bot
 let bot = new Client({
-  fetchAllMembers: true, 
+
   presence: {
-    status: 'online',
+    status: 'idle',
     activity: {
       name: `${config.prefix}help`,
       type: 'WATCHING'
@@ -21,14 +22,16 @@ let bot = new Client({
   }
 });
 
-bot.on('ready', () => console.log(`Logged in as ${bot.user.tag}.`));
+
 bot.on('message', async message => {
+    bot.on('ready', () => console.log(`Logged in as ${bot.user.tag}.`));
+
   //check if messages being sent are valid commands
   if (message.content.startsWith(config.prefix)) {
     let args = message.content.slice(config.prefix.length).split(' ');
     let command = args.shift().toLowerCase();
-
     switch (command) {
+
         case 'humourSetting':
         message.channel.send("That\'s 70%")
         break;
@@ -57,7 +60,7 @@ bot.on('message', async message => {
           });*/
         
           var auth = message.author.tag
-          fs.writeFile('bugss/' + args[0] + '.txt', 'Submitted by: ' + auth + '\n'+ args.split(1,100) + '\n', function (err) {
+          fs.writeFile('bugs/' + args[0] + '.txt', 'Submitted by: ' + auth + '\n'+ process.argv + '\n', function (err) {
           if (err) throw err;
           console.log('Saved!');
          try {
@@ -68,7 +71,7 @@ bot.on('message', async message => {
           }
       });
 
-
+/* The missile knows where it is at all times. It knows this because it knows where it isn't, by subtracting where it is, from where it isn't, or where it isn't, from where it is, whichever is greater, it obtains a difference, or deviation. The guidance sub-system uses deviations to generate corrective commands to drive the missile from a position where it is, to a position where it isn't, and arriving at a position where it wasn't, it now is. Consequently, the position where it is, is now the position that it wasn't, and it follows that the position where it was, is now the position that it isn't. In the event of the position that it is in is not the position that it wasn't, the system has required a variation. The variation being the difference between where the missile is, and where it wasn't. If variation is considered to be a significant factor, it too, may be corrected by the GEA. However, the missile must also know where it was. The missile guidance computance scenario works as follows: Because a variation has modified some of the information the missile has obtained, it is not sure just where it is, however it is sure where it isn't, within reason, and it knows where it was. It now subracts where it should be, from where it wasn't, or vice versa. By differentiating this from the algebraic sum og where it shouldn't be, and where it was. It is able to obtain a deviation, and a variation, which is called "air" */
 
 
 
@@ -103,8 +106,27 @@ bot.on('message', async message => {
           ;
         message.channel.send(kipp);
         break;
-      
 
+/*  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⠟⠉⠉⠉⠉⠉⠉⠉⠙⠻⢶⣄⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣷⡀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡟⠀⣠⣶⠛⠛⠛⠛⠛⠛⠳⣦⡀⠀⠘⣿⡄⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠁⠀⢹⣿⣦⣀⣀⣀⣀⣀⣠⣼⡇⠀⠀⠸⣷⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡏⠀⠀⠀⠉⠛⠿⠿⠿⠿⠛⠋⠁⠀⠀⠀⠀⣿⡄⣠
+⠀⠀      ⠀⢠⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡇⠀                ........⠀⣸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀  
+⠀⠀⠀⠀⠀⠀⠀⠀⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣧⠀
+⠀⠀⠀⠀⠀⠀⠀⢸⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⠀
+⠀⠀⠀⠀⠀⠀⠀⣾⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀
+⠀⠀⠀⠀⠀⠀⠀⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀
+⠀⠀⠀⠀⠀⠀⢰⣿⠀⠀⠀⠀⣠⡶⠶⠿⠿⠿⠿⢷⣦⠀⠀⠀⠀⠀⠀⠀⣿⠀
+⠀⠀⣀⣀⣀⠀⣸⡇⠀⠀⠀⠀⣿⡀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⣿⠀
+⣠⡿⠛⠛⠛⠛⠻⠀⠀⠀⠀⠀⢸⣇⠀⠀⠀⠀⠀⠀⣿⠇⠀⠀⠀⠀⠀⠀⣿⠀
+⢻⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⡟⠀⠀⢀⣤⣤⣴⣿⠀⠀⠀⠀⠀⠀⠀⣿⠀
+⠈⠙⢷⣶⣦⣤⣤⣤⣴⣶⣾⠿⠛⠁⢀⣶⡟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡟⠀
+⢷⣶⣤⣀⠉⠉⠉⠉⠉⠄⠀⠀⠀⠀⠈⣿⣆⡀⠀⠀⠀⠀⠀⠀⢀⣠⣴⡾⠃⠀
+⠀⠈⠉⠛⠿⣶⣦⣄⣀⠀⠀⠀⠀⠀⠀⠈⠛⠻⢿⣿⣾⣿⡿⠿⠟⠋⠁⠀⠀⠀
+            */
+      break;
       //makes the help embed
       case 'help':
         let embed =  new MessageEmbed()
@@ -133,6 +155,9 @@ bot.on('message', async message => {
           }
         }
         message.channel.send(embed);
+        break;
+        default:
+        message.channel.send('wtf is that command? get good bro');
         break;
     }
   }
